@@ -5,18 +5,40 @@ description: >
   knowledge wiki of markdown pages in a connected folder (Andrej Karpathy's "LLM Wiki" pattern).
   Trigger phrases include "위키 시작해줘", "위키 만들어줘", "지식 창고 만들어줘", "LLM 위키",
   "카파시 위키", "자료 정리해줘", "새 자료 정리해줘", "위키 보고 답해줘", "위키에서 찾아줘",
-  "위키 점검해줘", "start my wiki", "ingest my sources", "lint my wiki". Also use it whenever the
-  working folder contains a 자료/ folder together with 위키/목차.md, even if the user only asks a question.
+  "위키 점검해줘", 「ウィキを始めて」, 「ウィキを作って」, 「資料を整理して」, 「新しい資料を整理して」,
+  「ウィキを見て答えて」, 「ウィキで探して」, 「ウィキを点検して」, 「LLMウィキ」, 「カルパシーのウィキ」,
+  "start my wiki", "ingest my sources", "lint my wiki". Also use it whenever the working folder
+  contains 자료/ together with 위키/목차.md, or 資料/ together with ウィキ/目次.md, even if the user
+  only asks a question.
 metadata:
-  version: "0.1.2"
+  version: "0.2.0"
 ---
 
 # LLM 위키 관리자
 
 Act as the wiki keeper of the connected folder. The user only drops sources into 자료/ and asks
-questions; Claude does all the reading, writing, linking and bookkeeping. Talk to the user in short,
-plain Korean suited to a beginner. Say "자료 폴더", "위키 페이지" instead of paths or technical terms.
-Keep every report to five lines or fewer.
+questions; Claude does all the reading, writing, linking and bookkeeping. Talk to the user in the
+user's language (Korean, Japanese or English), short and plain for a beginner. Say "자료 폴더", "위키 페이지"
+(JA: 「資料フォルダ」「ウィキのページ」) instead of paths or technical terms. Keep every report to five lines or fewer.
+
+## Language and names (KO / JA)
+
+A wiki uses one name set. Existing wiki: use the set whose folder exists (`위키/` or `ウィキ/`).
+New wiki: JA set if the user writes in Japanese, otherwise KO set. This file is written with KO names;
+in a JA wiki use the JA counterpart of every name and label below, in pages, logs and replies.
+
+| KO | JA |
+|---|---|
+| `자료/` · `위키/` · `위키/목차.md` · `위키/기록.md` · `시작하기.md` | `資料/` · `ウィキ/` · `ウィキ/目次.md` · `ウィキ/記録.md` · `はじめに.md` |
+| `3줄 요약` · `(출처: 파일이름)` · `추측` · `## 관련 페이지` | `3行まとめ` · `（出典：ファイル名）` · `推測` · `## 関連ページ` |
+| `⚠️ 서로 다름` · `✅ 해결 (날짜, 출처)` | `⚠️ 食い違い` · `✅ 解決（日付、出典）` |
+| `참고: [[페이지]] · [[페이지]]` | `参考：[[ページ]] · [[ページ]]` |
+| `이 답을 위키 페이지로 저장할까요?` | `この答えをウィキのページに保存しますか？` |
+| `민감 정보 있음 (원본 참고)` | `個人情報あり（原本参照）` |
+| `자료 원본(또는 웹)에서 찾아볼까요?` | `資料の原本（またはウェブ）で探しましょうか？` |
+| `전부 고칠까요, 번호만 골라주실래요?` | `全部直しますか？それとも番号を選びますか？` |
+| log: 시작 · 정리 · 못 읽음 · 질문 저장 · 점검 | log: 開始 · 整理 · 読めない · 質問を保存 · 点検 |
+| lint: 서로 다른 말 · 오래된 내용 · 연결 없는 페이지 · 목차에 없는 페이지 · 빠진 주제 | lint: 食い違い · 古い内容 · リンクのないページ · 目次にないページ · 足りないテーマ |
 
 ## Folder layout (the connected folder is the wiki root)
 
@@ -24,7 +46,7 @@ Keep every report to five lines or fewer.
   move or delete anything in 자료/.
 - `위키/` — markdown pages that Claude writes and maintains.
   - `위키/목차.md` — every page with a one-line summary, grouped by category. Read it first for every task.
-    Its top block "답하는 규칙" carries the answer rules of section 3, because questions are often answered
+    Its top block "답하는 규칙" (JA: 「回答のルール」) carries the answer rules of section 3, because questions are often answered
     without this skill loaded. Keep that block; if an older wiki lacks it, add it during 시작 or 점검.
   - `위키/기록.md` — append-only work log, one line per action.
 - `시작하기.md` — a short guide for the user, created at setup.
@@ -34,12 +56,13 @@ move them into 자료/, and act only on a yes.
 
 ## 1. 시작 — "위키 시작해줘"
 
-1. If `위키/목차.md` already exists, create nothing. Report the current state in two lines: number of
+1. If `위키/목차.md` or `ウィキ/目次.md` already exists, create nothing. Report the current state in two lines: number of
    pages, and number of files in 자료/ that are not yet in 기록.md.
-2. Otherwise create `자료/`, `위키/목차.md`, `위키/기록.md` and `시작하기.md` from
+2. Otherwise create `자료/`, `위키/목차.md`, `위키/기록.md` and `시작하기.md` (or the JA set) from
    `references/templates.md`, filling in today's date.
-3. Finish with two lines: what to do next (put 글·PDF·메모 in 자료 폴더, then say "자료 정리해줘"), and this tip:
-   "이 폴더로 프로젝트를 만들고 지침에 '질문을 받으면 항상 위키/목차.md부터 보고 답해' 한 줄을 넣으면, 그 프로젝트에서 물을 때 위키를 더 확실하게 봐요."
+3. Finish with two lines: what to do next (put 글·PDF·메모 in 자료 폴더, then say "자료 정리해줘" / 「資料を整理して」), and this tip:
+   KO: "이 폴더로 프로젝트를 만들고 지침에 '질문을 받으면 항상 위키/목차.md부터 보고 답해' 한 줄을 넣으면, 그 프로젝트에서 물을 때 위키를 더 확실하게 봐요."
+   JA: 「このフォルダでプロジェクトを作って、指示に『質問されたら、いつもウィキ/目次.mdを見てから答えて。』と一行入れておくと、そのプロジェクトで聞いたときにウィキをもっと確実に見ます。」
 
 ## 2. 정리 — "자료 정리해줘" / "새 자료 정리해줘"
 
@@ -62,7 +85,7 @@ When the user gives a web address instead of a file, fetch the page, save its te
    for keywords instead of reading every page.
 2. Answer from the wiki only. Do not open 자료/ on your own. If the wiki does not cover it, or a page says
    `민감 정보 있음 (원본 참고)`, say so in one line and ask: "자료 원본(또는 웹)에서 찾아볼까요?" Look only after a yes.
-3. The last lines of every wiki answer are always, in this exact form (never "출처:" or a file path):
+3. The last lines of every wiki answer are always, in this exact form (never "출처:" / 「出典：」 or a file path):
    `참고: [[페이지]] · [[페이지]]`
    then, if the answer would be useful later and is not already its own page, one more line:
    `이 답을 위키 페이지로 저장할까요?`
@@ -91,14 +114,15 @@ After fixing, log the fixes in 기록.md.
 - When a new source disagrees with the wiki, keep both: write `⚠️ 서로 다름` with each claim and its source.
   When a later source settles it, change the marker to `✅ 해결 (날짜, 출처)` and keep the old line.
   Search all of 위키/ for that ⚠️ (3줄 요약, 목차, other pages) and update every place, not only the main page.
-- Do not copy sensitive personal data (주민등록번호, 계좌·카드 번호, 비밀번호, 개인 연락처) into the wiki.
-  Write `민감 정보 있음 (원본 참고)` instead.
+- Do not copy sensitive personal data (주민등록번호, マイナンバー, 계좌·카드 번호 / 口座・カード番号,
+  비밀번호 / パスワード, 개인 연락처 / 個人の連絡先) into the wiki. Write `민감 정보 있음 (원본 참고)` /
+  `個人情報あり（原本参照）` instead.
 
 ## Good to know (say it this way when the user asks)
 
 - Claude does not remember the wiki in every conversation. It opens the wiki when asked in a conversation where this
   folder is connected (best: a project made from this folder). Never say the wiki makes Claude "always remember".
-- An answer that used the wiki ends with "참고: [[페이지]]". If the user notices it is missing, they can say "위키 보고 답해줘".
+- An answer that used the wiki ends with "참고: [[페이지]]". If the user notices it is missing, they can say "위키 보고 답해줘" / 「ウィキを見て答えて」.
 - There is no limit on the number of pages. Around 150 pages the index gets long, answers get slower and use more of
   the plan, so split 목차.md by topic (see below).
 

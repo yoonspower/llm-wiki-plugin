@@ -1,9 +1,9 @@
 {
   "name": "llm-wiki",
-  "version": "0.1.2",
-  "description": "클로드가 대신 정리하는 나만의 지식 창고 (카파시 LLM 위키 방식). 폴더 하나로 시작해서 자료 정리·질문·점검까지 한국어로.",
+  "version": "0.2.0",
+  "description": "클로드가 대신 정리하는 나만의 지식 창고 (카파시 LLM 위키 방식). 폴더 하나로 시작해서 자료 정리·질문·점검까지 한국어로. 日本語にも対応.",
   "author": {
     "name": "윤스쨩의 클코 교실"
   },
-  "keywords": ["llm-wiki", "knowledge-base", "second-brain", "karpathy", "위키"]
+  "keywords": ["llm-wiki", "knowledge-base", "second-brain", "karpathy", "위키", "ウィキ"]
 }
