@@ -4,7 +4,7 @@
 안드레 카파시(Andrej Karpathy)의 **LLM 위키(LLM Wiki)** 방식을 터미널·코딩 없이 **클로드(Claude) 데스크톱 앱**에서 바로 쓰게 만든 한국어 플러그인이에요.
 자료 폴더에 글·PDF·메모를 넣고 "자료 정리해줘" 한마디면, 클로드가 주제별 위키 페이지로 정리하고 바뀐 내용까지 고쳐 둬요. 나중에 물어보면 정리된 페이지를 펴 보고 출처와 함께 답해요.
 
-▶ 사용법 영상: 윤스쨩의 클코 교실 (유튜브)
+▶ **사용법 영상 (7분)**: https://youtu.be/wEIHXPr8j8o — 윤스쨩의 클코 교실
 
 ## ⬇️ 다운로드
 - **[llm-wiki.plugin 받기 (최신)](https://github.com/yoonspower/llm-wiki-plugin/releases/latest/download/llm-wiki.plugin)**
