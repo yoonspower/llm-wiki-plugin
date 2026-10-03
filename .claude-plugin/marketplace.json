@@ -4,7 +4,7 @@
     "name": "윤스쨩의 클코 교실"
   },
   "metadata": {
-    "description": "카파시 LLM 위키를 코딩 없이 클로드 앱에서 — 한국어 플러그인"
+    "description": "카파시 LLM 위키를 코딩 없이 클로드 앱에서 — 한국어·日本語 플러그인"
   },
   "plugins": [
     {

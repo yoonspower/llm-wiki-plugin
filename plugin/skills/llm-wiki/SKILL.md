@@ -23,8 +23,9 @@ user's language (Korean, Japanese or English), short and plain for a beginner. S
 
 ## Language and names (KO / JA)
 
-A wiki uses one name set. Existing wiki: use the set whose folder exists (`위키/` or `ウィキ/`).
-New wiki: JA set if the user writes in Japanese, otherwise KO set. This file is written with KO names;
+A wiki uses one name set. Existing wiki: use the set whose index exists (`위키/목차.md` or `ウィキ/目次.md`); if both
+exist, ask once which one to use. New wiki: if the folder already has `자료/` or `資料/`, use that set; otherwise JA set
+if the user writes in Japanese, KO set for Korean or English (English users get English replies with KO names). This file is written with KO names;
 in a JA wiki use the JA counterpart of every name and label below, in pages, logs and replies.
 
 | KO | JA |
@@ -85,7 +86,8 @@ When the user gives a web address instead of a file, fetch the page, save its te
    for keywords instead of reading every page.
 2. Answer from the wiki only. Do not open 자료/ on your own. If the wiki does not cover it, or a page says
    `민감 정보 있음 (원본 참고)`, say so in one line and ask: "자료 원본(또는 웹)에서 찾아볼까요?" Look only after a yes.
-3. The last lines of every wiki answer are always, in this exact form (never "출처:" / 「出典：」 or a file path):
+3. The last lines of every wiki answer are always, in this exact form — in a JA wiki its JA form from the table
+   (never "출처:" / 「出典：」 or a file path):
    `참고: [[페이지]] · [[페이지]]`
    then, if the answer would be useful later and is not already its own page, one more line:
    `이 답을 위키 페이지로 저장할까요?`
@@ -128,6 +130,6 @@ After fixing, log the fixes in 기록.md.
 
 ## When the wiki grows
 
-- Past about 150 pages, suggest splitting 목차.md into category indexes (`위키/목차-<분류>.md`) linked from 목차.md.
+- Past about 150 pages, suggest splitting 목차.md into category indexes (`위키/목차-<분류>.md`, JA `ウィキ/目次-<分類>.md`) linked from 목차.md.
 - Karpathy notes the index approach works well up to roughly 100 sources and a few hundred pages; beyond
   that, suggest adding a search tool rather than reading more pages per question.

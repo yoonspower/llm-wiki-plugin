@@ -47,13 +47,16 @@
 6. ときどき **「ウィキを点検して」** → 食い違い・古い内容・リンクのないページを番号で見せて、直す前に聞きます。
 - 内容が食い違うと消さずに `⚠️ 食い違い` で両方書き、あとの資料で確かめられたら `✅ 解決` に変えます（前の行は残します）。
 - マイナンバー・口座番号・パスワード・個人の連絡先はウィキに写さず `個人情報あり（原本参照）` と書きます。
-- インストールは上の「설치」と同じです（Customize → Plugins → アップロード、または Add marketplace → `yoonspower/llm-wiki-plugin`）。
+- ダウンロード：[llm-wiki.plugin](https://github.com/yoonspower/llm-wiki-plugin/releases/latest/download/llm-wiki.plugin)（アップロードできないときは [llm-wiki.zip](https://github.com/yoonspower/llm-wiki-plugin/releases/latest/download/llm-wiki.zip)）
+- インストール：Claude デスクトップアプリ → Customize → Plugins → アップロード、または Add marketplace → `yoonspower/llm-wiki-plugin`
+- 韓国語で作ったウィキ（자료/・위키/목차.md）はフォルダ名を変えずにそのまま使います。その場合、プロジェクトの指示は `위키/목차.md` を見るように書いてください。
+- English: replies in English, with Korean folder names (자료/·위키/목차.md).
 
 ## 테스트
 가상 회사 자료 21개(PDF·워드·엑셀·CSV·메모)로 시험: 5개씩 나눠 정리, 서로 다른 말 2건 발견 → 공지로 해결, 원본 변경 0, 깨진 링크 0, 민감정보 옮김 0.
 
 ## 버전
-- 0.2.0 (2026-10-02): 日本語対応 — 일본어로 말하면 일본어로 답하고 일본어 폴더(資料/・ウィキ/目次.md)로 시작. 기존 위키는 있는 폴더 이름 그대로
+- 0.2.0 (2026-10-03): 日本語対応 — 일본어로 말하면 일본어로 답하고 일본어 폴더(資料/・ウィキ/目次.md)로 시작. 기존 위키는 있는 폴더 이름 그대로
 - 0.1.2 (2026-10-02): 질문 답 끝 '참고' 줄·저장 제안·원본 열기 전 확인을 목차 규칙으로 고정, ⚠️ 해결 시 모든 페이지 반영
 - 0.1.1: 안내문 정리 / 0.1.0: 첫 공개
 
